@@ -19,4 +19,14 @@ class Car {
     }
 }
 
+function greet() {
+    console.log('Hello World!!')
+}
+
+function goodBye() {
+    console.log('Bye!!')
+}
+
 module.exports.Car = Car
+module.exports.greet = greet
+module.exports.goodBye = goodBye
