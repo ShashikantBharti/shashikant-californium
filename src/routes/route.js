@@ -1,6 +1,92 @@
 const express = require('express');
 const router = express.Router();
 
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ]
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ]
+       },
+   ]
+
+router.post('/player', (req, res) => {
+    let playerExist = false
+    players.forEach(item => {
+        if (item.name.toLowerCase() === req.body.name.toLowerCase()) 
+            playerExist = true
+    })
+    
+    if (!playerExist) {
+        players.push(req.body)
+    } else {
+        res.send({data: players, status: false})
+    }
+
+    res.send({data: players, status: true})
+})
+
+
+
+
+
+
+let persons = [
+    {
+        name: "PK",
+        age: 10,
+        votingStatus: false
+    },
+    {
+        name: "SK",
+        age: 20,
+        votingStatus: false
+    },
+    {
+        name: "AA",
+        age: 70,
+        votingStatus: false
+    },
+    {
+        name: "SC",
+        age: 5,
+        votingStatus: false
+    },
+    {
+        name: "HO",
+        age: 40,
+        votingStatus: false
+    }
+ ]
+
+router.post('/persons', (req, res) => {
+    let voterAge = req.query.voterAge
+    persons.map(x => { if (x.age >= voterAge) return x.votingStatus = true })
+    res.send(persons)
+})
+
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
